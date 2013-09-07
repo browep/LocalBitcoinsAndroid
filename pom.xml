@@ -9,7 +9,7 @@
 	<name>localbtc - Parent</name>
 
 	<modules>
-		<module>localbtc</module>
+		<module>localbtc-example</module>
 		<module>localbtc-it</module>
 	</modules>
 
@@ -51,7 +51,7 @@
 					<version>${android.plugin.version}</version>
 					<configuration>
 						<sdk>
-							<platform>8</platform>
+							<platform>16</platform>
 						</sdk> 
 											</configuration>
 				</plugin>
