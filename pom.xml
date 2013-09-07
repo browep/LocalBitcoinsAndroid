@@ -11,6 +11,7 @@
 		<module>localbtc-example</module>
 		<module>localbtc-it</module>
     <module>localbtc</module>
+        <module>volley</module>
   </modules>
 
 	<properties>
