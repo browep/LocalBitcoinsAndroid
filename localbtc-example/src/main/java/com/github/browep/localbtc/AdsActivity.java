@@ -5,10 +5,13 @@ import com.github.browep.localbtc.models.response.LocalBuyAds;
 import com.github.browep.localbtc.models.response.Places;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -39,18 +42,18 @@ public class AdsActivity extends BaseActivity {
         mProgressDialog.show();
 
         getApi().getLocationId(40.0176, -105.2797, new Response.Listener<Places>() {
-                    public void onResponse(Places response) {
-                        Log.d(TAG, response.toString());
-                        onFoundPlace(response.get(0));
-                    }
-                }
+            public void onResponse(Places response) {
+                Log.d(TAG, response.toString());
+                onFoundPlace(response.get(0));
+            }
+        }
                 , new Api.LoggingErrorListener(TAG)
         );
     }
 
     public void onFoundPlace(Places.Place place) {
         getApi().getLocalBuyAds(place, new Response.Listener<LocalBuyAds>() {
-            public void onResponse(LocalBuyAds buyAds) {
+            public void onResponse(final LocalBuyAds buyAds) {
 
                 // sort
                 Collections.sort(buyAds, new Comparator<LocalBuyAds.LocalBuyAd>() {
@@ -59,6 +62,14 @@ public class AdsActivity extends BaseActivity {
                     }
                 });
                 mListView.setAdapter(new AdsListAdapter(buyAds));
+
+                mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setData(Uri.parse(buyAds.get(i).getActions().getPublic_view()));
+                        startActivity(intent);
+                    }
+                });
 
                 mProgressDialog.dismiss();
             }
