@@ -30,6 +30,8 @@ public class AdsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ads_activity);
 
+        getSupportActionBar().setTitle(getString(R.string.buy_locally));
+
         mListView = (ListView) findViewById(R.id.listview);
 
         mProgressDialog = new ProgressDialog(this);
