@@ -5,8 +5,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.github.browep.localbtc.models.response.LocalBuyAds;
 import com.github.browep.localbtc.models.response.Places;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.util.Log;
 
@@ -52,6 +54,15 @@ public class Api {
         mRequestQueue.add(postRequest);
     }
 
+    public void getLocalBuyAds(Places.Place place, Response.Listener<LocalBuyAds> successListener,
+            Response.ErrorListener errorListener) {
+        Request request = new GsonRequest(mApiAdapter, LocalBuyAds.class, Request.Method.GET, place.getBuyLocalUrl(),
+                successListener, errorListener);
+
+        mRequestQueue.add(request);
+
+    }
+
     private static String getUrl(String pathSuffix) {
         return PROTOCOL + HOST + API_PATH_PREFIX + pathSuffix;
     }
@@ -72,6 +83,25 @@ public class Api {
                 Log.e(tag, networkResponseStr, error);
             } else {
                 Log.e(tag, error.getMessage(), error);
+            }
+        }
+    }
+
+    public static class LoggingDismissingErrorListener extends LoggingErrorListener {
+
+        private Dialog mDialog;
+
+        public LoggingDismissingErrorListener(String tag, Dialog dialog) {
+            super(tag);
+
+            mDialog = dialog;
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            super.onErrorResponse(error);
+            if(mDialog != null) {
+                mDialog.dismiss();
             }
         }
     }
