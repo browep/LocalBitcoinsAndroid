@@ -1,16 +1,17 @@
 package com.github.browep.localbtc.test;
 
-import android.test.ActivityInstrumentationTestCase2;
-import com.github.browep.localbtc.*;
+import com.github.browep.localbtc.AdsActivity;
 
-public class HelloAndroidActivityTest extends ActivityInstrumentationTestCase2<HelloAndroidActivity> {
+import android.test.ActivityInstrumentationTestCase2;
+
+public class HelloAndroidActivityTest extends ActivityInstrumentationTestCase2<AdsActivity> {
 
     public HelloAndroidActivityTest() {
-        super(HelloAndroidActivity.class); 
+        super(AdsActivity.class);
     }
 
     public void testActivity() {
-        HelloAndroidActivity activity = getActivity();
+        AdsActivity activity = getActivity();
         assertNotNull(activity);
     }
 }
