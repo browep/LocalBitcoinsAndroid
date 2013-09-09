@@ -29,6 +29,18 @@ This project uses maven to handle dependencies as well as the [Maven SDK Deploye
 - run `mvn package` ( this will build the apks )
 - find the apk's in `./localbtc-example/target/localbtc.apk`
 
+Contact
+-------
+
+brower.paul@gmail.com
+
+Contributing
+------------
+
+Code contributions are always welcome.  Feel free to fork, create Pull Requests.
+
+Tips: 1NLsujn7SVcg3p7CzX3U8uHgCHBiN4tieo
+
 Screenshots
 -----------
 
