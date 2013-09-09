@@ -4,5 +4,7 @@
     <string name="app_name">Local Bitcoins</string>
     <string name="action_settings">Settings</string>
     <string name="loading">Loading...</string>
+    <string name="buy_locally">Buy Locally</string>
+    <string name="usd_per_btc">USD/BTC</string>
 
 </resources>

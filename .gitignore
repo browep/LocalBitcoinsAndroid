@@ -3,3 +3,5 @@ localbtc-it/target
 localbtc/target
 *iml
 .idea/
+out/
+localbtc-example/gen-external-apklibs/
