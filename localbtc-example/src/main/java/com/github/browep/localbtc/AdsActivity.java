@@ -18,10 +18,16 @@ public class AdsActivity extends BaseActivity {
         getApi().getLocationId(40.0176, -105.2797, new Response.Listener<Places>() {
                     public void onResponse(Places response) {
                         Log.d(TAG, response.toString());
+                        onFoundPlace(response.getList().get(0));
                     }
                 }
                 , new Api.LoggingErrorListener(TAG)
         );
+    }
+
+    public void onFoundPlace(Places.Place place) {
+
+
     }
 
 }

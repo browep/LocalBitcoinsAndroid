@@ -1,16 +1,12 @@
 package com.github.browep.localbtc.models.response;
 
-import java.util.List;
+import java.util.LinkedList;
 
-public class Places {
+public class Places extends LinkedList<Places.Place> {
 
     private static String TAG = Places.class.getCanonicalName();
 
-    private List<Place> places;
-
-    public List<Place> getList() {
-        return places;
-    }
+    public static final String JSON_SUB_ITEM = "places";
 
     public static class Place {
         private String sell_local_url;

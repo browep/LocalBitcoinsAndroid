@@ -2,6 +2,7 @@ package com.github.browep.localbtc.test;
 
 import com.android.volley.NetworkResponse;
 import com.github.browep.localbtc.ApiAdapter;
+import com.github.browep.localbtc.models.response.LocalBuyAds;
 import com.github.browep.localbtc.models.response.Places;
 import com.github.browep.localbtc.util.IOUtil;
 
@@ -41,9 +42,21 @@ public class ApiAdapterTest {
         String json = getJson("mock-responses/places.json");
         Places places = (Places) mApiAdapter.parseNetworkResponse(Places.class, new NetworkResponse(json.getBytes()));
         assertNotNull(places);
-        assertEquals(1, places.getList().size());
-        Places.Place place = places.getList().get(0);
+        assertEquals(1, places.size());
+        Places.Place place = places.get(0);
         assertEquals("80302, US", place.getLocationString());
+
+    }
+
+    @Test
+    public void testLocalBuyAds() throws Exception {
+        String json = getJson("mock-responses/local-buy-ads.json");
+        LocalBuyAds localBuyAds = (LocalBuyAds) mApiAdapter
+                .parseNetworkResponse(LocalBuyAds.class, new NetworkResponse(json.getBytes()));
+        assertNotNull(localBuyAds);
+        assertEquals(30, localBuyAds.size());
+        LocalBuyAds.LocalBuyAd localBuyAd = localBuyAds.get(0);
+        assertEquals("Chris-bits", localBuyAd.getData().getProfile().getUsername());
 
     }
 

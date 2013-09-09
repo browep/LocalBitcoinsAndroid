@@ -11,6 +11,8 @@ import com.android.volley.NetworkResponse;
 
 import android.util.Log;
 
+import java.lang.reflect.Field;
+
 public class ApiAdapter {
 
     private static String TAG = ApiAdapter.class.getCanonicalName();
@@ -28,10 +30,22 @@ public class ApiAdapter {
         String jsonStr = new String(networkResponse.data);
         try {
             JsonElement jsonElement = mJsonParser.parse(jsonStr);
-            if(jsonElement instanceof JsonObject && jsonElement.getAsJsonObject().has("data")){
+            if (jsonElement instanceof JsonObject && jsonElement.getAsJsonObject().has("data")) {
                 jsonElement = jsonElement.getAsJsonObject().get("data");
+                try {
+                    Field jsonSubItemField = aClass.getField("JSON_SUB_ITEM");
+                    String jsonSubItemString = (String) jsonSubItemField.get(String.class);
+                    if (jsonElement instanceof JsonObject && jsonElement.getAsJsonObject().has(jsonSubItemString)) {
+                        jsonElement = jsonElement.getAsJsonObject().get(jsonSubItemString);
+                    }
+                } catch (NoSuchFieldException e) {
+
+                } catch (IllegalAccessException e) {
+
+                }
+
             }
-            return mGson.fromJson(jsonElement, aClass );
+            return mGson.fromJson(jsonElement, aClass);
         } catch (JsonSyntaxException e) {
             Log.e(TAG, "error with: " + jsonStr, e);
             throw new RuntimeException(e);
