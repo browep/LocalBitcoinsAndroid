@@ -1,0 +1,13 @@
+{"data": {
+    "place_count": 1,
+    "places": [
+        {
+            "sell_local_url": "https://localbitcoins.com/sell-bitcoins-with-cash/529016/80302-us/.json",
+            "location_string": "80302, US",
+            "url": "/places/529016/80302-us/",
+            "lon": -105.29,
+            "lat": 40.02,
+            "buy_local_url": "https://localbitcoins.com/buy-bitcoins-with-cash/529016/80302-us/.json"
+        }
+    ]
+}}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Local Bitcoins</string>
+    <string name="action_settings">Settings</string>
+    <string name="loading">Loading...</string>
+    <string name="buy_locally">Buy Locally</string>
+    <string name="usd_per_btc">USD/BTC</string>
+    <string name="change_location">Change Location</string>
+    <string name="location_prompt">Where would you like to look? Enter a town or zip.</string>
+    <string name="location_error_promp">Not sure where: \"{0}\" is.  Try a different location.</string>
+
+</resources>
