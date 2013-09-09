@@ -5,6 +5,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.github.browep.localbtc.models.response.Places;
 
 import android.content.Context;
 import android.util.Log;
@@ -25,6 +26,7 @@ public class Api {
     private Context mContext;
 
     private static RequestQueue mRequestQueue;
+    private static ApiAdapter mApiAdapter;
 
     public Api(Context context) {
         mContext = context;
@@ -32,16 +34,20 @@ public class Api {
             if (mRequestQueue == null) {
                 mRequestQueue = Volley.newRequestQueue(mContext);
             }
+
+            if (mApiAdapter == null) {
+                mApiAdapter = new ApiAdapter();
+            }
         }
     }
 
-    public void getLocationId(final double lat, final double lon, Response.Listener<String> successListener,
+    public void getLocationId(final double lat, final double lon, Response.Listener<Places> successListener,
             Response.ErrorListener errorListener) {
         Map<String, String> params = new HashMap<String, String>();
         params.put("lat", String.valueOf(lat));
         params.put("lon", String.valueOf(lon));
 
-        FormRequest postRequest = new FormRequest(Request.Method.POST, getUrl("/places/"), params, successListener,
+        FormRequest postRequest = new FormRequest<Places>(mApiAdapter, Places.class, Request.Method.POST, getUrl("/places/"), params, successListener,
                 errorListener);
         mRequestQueue.add(postRequest);
     }
