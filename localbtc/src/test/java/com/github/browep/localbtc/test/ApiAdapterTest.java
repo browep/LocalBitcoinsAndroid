@@ -2,6 +2,7 @@ package com.github.browep.localbtc.test;
 
 import com.android.volley.NetworkResponse;
 import com.github.browep.localbtc.ApiAdapter;
+import com.github.browep.localbtc.models.response.Geocode;
 import com.github.browep.localbtc.models.response.LocalBuyAds;
 import com.github.browep.localbtc.models.response.Places;
 import com.github.browep.localbtc.util.IOUtil;
@@ -57,6 +58,17 @@ public class ApiAdapterTest {
         assertEquals(30, localBuyAds.size());
         LocalBuyAds.LocalBuyAd localBuyAd = localBuyAds.get(0);
         assertEquals("Chris-bits", localBuyAd.getData().getProfile().getUsername());
+
+    }
+
+    @Test
+    public void testGeocode() throws Exception {
+        String json = getJson("mock-responses/geocode.json");
+        Geocode geocode = (Geocode) mApiAdapter
+                .parseNetworkResponse(Geocode.class, new NetworkResponse(json.getBytes()));
+        assertNotNull(geocode);
+        assertEquals(37.4219306, geocode.getLatitude());
+        assertEquals(-122.0839786, geocode.getLongitude());
 
     }
 

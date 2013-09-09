@@ -5,6 +5,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.github.browep.localbtc.models.response.Geocode;
 import com.github.browep.localbtc.models.response.LocalBuyAds;
 import com.github.browep.localbtc.models.response.Places;
 
@@ -13,6 +14,7 @@ import android.content.Context;
 import android.util.Log;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Api {
@@ -61,6 +63,17 @@ public class Api {
 
         mRequestQueue.add(request);
 
+    }
+
+    public void geocode(String locationStr, Response.Listener<Geocode> successListener,
+            Response.ErrorListener errorListener) {
+        Map<String,String> params = new LinkedHashMap<String, String>();
+        params.put("address", locationStr);
+        params.put("sensor","false");
+        Request request = new GsonRequest(mApiAdapter, Geocode.class, Request.Method.GET,
+                "http://maps.googleapis.com/maps/api/geocode/json", params, successListener, errorListener);
+
+        mRequestQueue.add(request);
     }
 
     private static String getUrl(String pathSuffix) {
